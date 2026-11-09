@@ -1,0 +1,277 @@
+{
+  "meta": {
+    "title": "Английский в фокусе (Spotlight). Сборник упражнений. 3 класс",
+    "author": "Н.И. Быкова и др.",
+    "grade": 3,
+    "subject": "english",
+    "sourceFile": "Angliiskii_v_fokuse_Sbornik_uprazhnenii_3_klass_Bykova 1.pdf",
+    "parsedPrintedPages": "4-15 (Вводные модули, задания 1-18 + начало Вводного теста)",
+    "parsedAt": "2026-09-01",
+    "updatedAt": "2026-09-02",
+    "pilotNote": "Подключено в lib/textbookIndex.ts (BOOKS) и реализовано в коде (8 новых answerType, 01.09.2026) — см. CLAUDE.md, раздел «Индекс учебника: первый предмет english».",
+    "restructureNote": "ОБНОВЛЕНО 02.09.2026 (дважды за день): (1) изолированный смоук-тест (scripts/test-english-detect-diag.ts) на реальных страницах учебника показал, что общий детект (DETECT_TASKS_PROMPT) находит задания по РЕАЛЬНО НАПЕЧАТАННЫМ на странице номерам строк — а на многих страницах этого сборника у КАЖДОЙ строки/предложения внутри одного упражнения есть СВОЙ печатный номер (например упражнение 16 нумерует свои 16 пропусков как «1.»...«16.», а не «16а»/«16б»). Задания с такой построчной нумерацией разнесены на ОТДЕЛЬНЫЕ записи индекса с этим реальным номером (по одному item на task) — код не менялся, только структура данных. (2) При этой же переработке обнаружена и исправлена ВТОРАЯ, независимая ошибка: printedPage у большинства заданий (начиная с задания 2) была систематически смещена относительно реальных страниц PDF — перепроверено напрямую по видимому номеру страницы внизу каждого скана (формула page-NN.png = печатная страница NN+3, подтверждено на всех 12 файлах). Смещение печатных страниц НЕ влияло на само сопоставление по фото (matchCandidatesToIndex использует только task.number и текст, не page.printedPage) — это чисто документационная неточность, исправлена для честности индекса.",
+    "verification": "Все закрытые (детерминированные) задания перепроверены на внутреннюю логическую согласованность отдельным node-скриптом — задание 17 (сопоставление реплик, 14 отдельных записей) содержит ровно 14 вопросов и 14 ответов, подтверждена полная биекция без повторов; задание 1 на стр.4 (распределение 56 слов по 11 категориям + 12 уже данных примеров, у Food/drinks их два) даёт ровно 68 — сходится с исходным списком без остатка. Открытые/личные задания (расскажи о себе, о своей семье) НЕ имеют единственного ответа — помечены соответствующим answerType.",
+    "newAnswerTypesNote": "8 answerType для english реализованы в lib/textbookIndex.ts/lib/openai.ts 01.09.2026 (word_categorization, pluralize_nouns, pronoun_replacement, multiple_choice, verb_form_fill, sentence_from_cue, question_response_matching, odd_one_out) — см. подробности в CLAUDE.md.",
+    "unresolvedNote": "Задания 6, 7, 8, 13, 15, 18 — полностью или частично ОТКРЫТЫЕ: про свою семью, свои вкусы, что носишь сам — единственного правильного ответа не существует в принципе (кроме грамматической формы глагола, которая помечена отдельно). Задание 15 (что носишь в разную погоду) содержит элемент личного выбора при формально заданном банке слов — не считается строго детерминированным. Файл обрывается на середине 'Вводного теста' (стр.15, задание 3) — дальше файл не прислан. Номера задач в индексе массово НЕ уникальны (каждое упражнение на странице нумерует свои строки заново с 1) — это ожидаемо и разрешается текстовым сопоставлением (см. matchCandidatesToIndex в lib/openai.ts), как и во всём остальном индексе."
+  },
+  "pages": [
+    {
+      "printedPage": 4,
+      "section": "Вводные модули. Задание 1",
+      "tasks": [
+        {
+          "number": "1",
+          "prompt": "Напиши слова в нужной строчке, а затем прочти и переведи.",
+          "answerType": "word_categorization",
+          "categories": [
+            { "name": "Family", "given": "mummy", "words": ["daddy", "grandma", "brother", "sister", "grandpa"] },
+            { "name": "Seasons", "given": "winter", "words": ["Spring", "summer", "autumn"] },
+            { "name": "Animals", "given": "horse", "words": ["chimp", "fish", "bird", "mouse", "frog"] },
+            { "name": "Colours", "given": "green", "words": ["red", "yellow", "blue", "white", "brown", "black"] },
+            { "name": "Circus", "given": "clown", "words": ["magician"] },
+            { "name": "Toys", "given": "ball", "words": ["teddy bear", "doll", "toy soldier", "yoyo", "puppet", "jack-in-the-box"] },
+            { "name": "House", "given": "garden", "words": ["bedroom", "kitchen", "living room", "bathroom"] },
+            { "name": "Room", "given": "bed", "words": ["chair", "shelf", "table", "radio"] },
+            { "name": "Food, drinks", "given": "sandwich, milk", "words": ["chocolate cake", "burger", "orange juice", "chips", "apple", "pizza", "ice cream"] },
+            { "name": "Body", "given": "nose", "words": ["hand", "mouth", "feet", "ear", "eye", "dark hair", "fair hair"] },
+            { "name": "Clothes", "given": "T-shirt", "words": ["socks", "coat", "skirt", "jacket", "hat", "jeans", "shorts", "shoes"] }
+          ],
+          "notes": "56 слов из общего списка + 12 уже данных примеров (у категории Food, drinks их два — sandwich И milk, у остальных десяти категорий по одному) = 68, полностью сходится с исходным списком без остатка. Категории не пронумерованы на странице — оставлено одной записью индекса (не построчная нумерация)."
+        }
+      ]
+    },
+    {
+      "printedPage": 5,
+      "section": "Вводные модули. Задание 2, начало (пронумеровано 1-9 на стр.5-6; здесь пункты 1-7)",
+      "tasks": [
+        { "number": "1", "prompt": "Напиши существительные во множественном числе. Образец: 3/book — three books.", "answerType": "pluralize_nouns", "items": [{ "count": 2, "noun": "table", "answer": "two tables" }] },
+        { "number": "2", "prompt": "Напиши существительные во множественном числе.", "answerType": "pluralize_nouns", "items": [{ "count": 10, "noun": "toy", "answer": "ten toys" }] },
+        { "number": "3", "prompt": "Напиши существительные во множественном числе.", "answerType": "pluralize_nouns", "items": [{ "count": 7, "noun": "girl", "answer": "seven girls" }] },
+        { "number": "4", "prompt": "Напиши существительные во множественном числе.", "answerType": "pluralize_nouns", "items": [{ "count": 9, "noun": "flower", "answer": "nine flowers" }] },
+        { "number": "5", "prompt": "Напиши существительные во множественном числе.", "answerType": "pluralize_nouns", "items": [{ "count": 4, "noun": "sandwich", "answer": "four sandwiches" }], "notes": "-es после ch." },
+        { "number": "6", "prompt": "Напиши существительные во множественном числе.", "answerType": "pluralize_nouns", "items": [{ "count": 6, "noun": "T-shirt", "answer": "six T-shirts" }] },
+        { "number": "7", "prompt": "Напиши существительные во множественном числе.", "answerType": "pluralize_nouns", "items": [{ "count": 8, "noun": "tree", "answer": "eight trees" }] }
+      ]
+    },
+    {
+      "printedPage": 6,
+      "section": "Вводные модули. Задание 2, окончание (пункты 8-9) + задания 3-4 + задание 5, начало",
+      "tasks": [
+        { "number": "8", "prompt": "Напиши существительные во множественном числе.", "answerType": "pluralize_nouns", "items": [{ "count": 12, "noun": "glass", "answer": "twelve glasses" }], "notes": "-es после s." },
+        { "number": "9", "prompt": "Напиши существительные во множественном числе.", "answerType": "pluralize_nouns", "items": [{ "count": 11, "noun": "box", "answer": "eleven boxes" }], "notes": "-es после x." },
+        {
+          "number": "3",
+          "prompt": "Замени существительные соответствующими местоимениями he, she, it, they. Образец: grandma — she.",
+          "answerType": "pronoun_replacement",
+          "items": [
+            { "noun": "brother", "answer": "he" },
+            { "noun": "children", "answer": "they" },
+            { "noun": "house", "answer": "it" },
+            { "noun": "mummy", "answer": "she" },
+            { "noun": "sandwiches", "answer": "they" },
+            { "noun": "bed", "answer": "it" },
+            { "noun": "radio", "answer": "it" },
+            { "noun": "jeans", "answer": "they" }
+          ],
+          "notes": "На странице список идёт без цифр перед каждой строкой (двухколоночная таблица «слово — местоимение») — оставлено одной записью индекса."
+        },
+        { "number": "1", "prompt": "Выбери правильный перевод.", "answerType": "multiple_choice", "items": [{ "question": "on the bed", "options": { "a": "под кроватью", "b": "на кровати" }, "answer": "b" }] },
+        { "number": "2", "prompt": "Выбери правильный перевод.", "answerType": "multiple_choice", "items": [{ "question": "under the table", "options": { "a": "на столе", "b": "под столом" }, "answer": "b" }] },
+        { "number": "3", "prompt": "Выбери правильный перевод.", "answerType": "multiple_choice", "items": [{ "question": "in the box", "options": { "a": "в коробке", "b": "на коробке" }, "answer": "a" }] },
+        { "number": "4", "prompt": "Выбери правильный перевод.", "answerType": "multiple_choice", "items": [{ "question": "on the chair", "options": { "a": "под стулом", "b": "на стуле" }, "answer": "b" }] },
+        { "number": "5", "prompt": "Выбери правильный перевод.", "answerType": "multiple_choice", "items": [{ "question": "under the shelf", "options": { "a": "под полкой", "b": "на полке" }, "answer": "a" }] },
+        { "number": "6", "prompt": "Выбери правильный перевод.", "answerType": "multiple_choice", "items": [{ "question": "near the house", "options": { "a": "в доме", "b": "рядом с домом" }, "answer": "b" }] },
+        { "number": "1", "prompt": "Впиши am, is, are.", "answerType": "verb_form_fill", "items": [{ "sentence": "I ___ happy.", "answer": ["am"] }] },
+        { "number": "2", "prompt": "Впиши am, is, are.", "answerType": "verb_form_fill", "items": [{ "sentence": "This ___ my brother Tom.", "answer": ["is"] }] }
+      ]
+    },
+    {
+      "printedPage": 7,
+      "section": "Вводные модули. Задание 5, окончание (пункты 3-8) + задание 6 (открытое)",
+      "tasks": [
+        { "number": "3", "prompt": "Впиши am, is, are.", "answerType": "verb_form_fill", "items": [{ "sentence": "How old ___ you? I ___ 8 years old.", "answer": ["are", "am"] }] },
+        { "number": "4", "prompt": "Впиши am, is, are.", "answerType": "verb_form_fill", "items": [{ "sentence": "Where ___ mummy and daddy? They ___ in the garden.", "answer": ["are", "are"] }] },
+        { "number": "5", "prompt": "Впиши am, is, are.", "answerType": "verb_form_fill", "items": [{ "sentence": "The apples ___ green.", "answer": ["are"] }] },
+        { "number": "6", "prompt": "Впиши am, is, are.", "answerType": "verb_form_fill", "items": [{ "sentence": "What ___ your favourite food? It ___ pizza.", "answer": ["is", "is"] }] },
+        { "number": "7", "prompt": "Впиши am, is, are.", "answerType": "verb_form_fill", "items": [{ "sentence": "___ you in your room? No, I ___ not.", "answer": ["Are", "am"] }] },
+        { "number": "8", "prompt": "Впиши am, is, are.", "answerType": "verb_form_fill", "items": [{ "sentence": "It ___ hot.", "answer": ["is"] }] },
+        {
+          "number": "6",
+          "prompt": "Напиши, что умеют/не умеют делать данные животные (a dog, a cat, a frog, a horse, a bird, a chimp, a fish + swim, jump, swing, dance, run, sing, climb, fly).",
+          "answerType": "open_creative_verified",
+          "exampleSolution": {
+            "a dog": "can run", "a cat": "can climb", "a frog": "can jump",
+            "a horse": "can run (дано образцом)", "a bird": "can fly",
+            "a chimp": "can swing", "a fish": "can swim"
+          },
+          "notes": "8 слов-действий на 7 животных — 2 (dance, sing) остаются неиспользованными (вероятно, отвлекающие варианты). Реальные животные могут уметь больше одного действия — единственно верного ответа для каждого пункта нет, дан наиболее очевидный/канонический вариант по стандартной лексике Spotlight."
+        }
+      ]
+    },
+    {
+      "printedPage": 8,
+      "section": "Вводные модули. Задания 7-8 (открытые)",
+      "tasks": [
+        {
+          "number": "7",
+          "prompt": "Напиши, что ты и твои родственники умеют/не умеют делать (личное, про себя и семью).",
+          "answerType": "open_creative",
+          "notes": "Полностью личное задание, единственного ответа нет."
+        },
+        {
+          "number": "8",
+          "prompt": "Расспроси своего друга о том, что он умеет делать (вопросы Can you...?).",
+          "answerType": "open_creative",
+          "notes": "Полностью открытое — свои вопросы."
+        }
+      ]
+    },
+    {
+      "printedPage": 9,
+      "section": "Вводные модули. Задание 9 (пронумеровано 1-7 на странице; 1-4 личные, только 5-7 в индексе) + задание 10",
+      "tasks": [
+        { "number": "5", "prompt": "Ответь на вопросы.", "answerType": "verb_form_fill", "items": [{ "sentence": "Can a bird fly?", "answer": ["Yes, it can."] }] },
+        { "number": "6", "prompt": "Ответь на вопросы.", "answerType": "verb_form_fill", "items": [{ "sentence": "Can a horse climb?", "answer": ["No, it can't."] }] },
+        { "number": "7", "prompt": "Ответь на вопросы.", "answerType": "verb_form_fill", "items": [{ "sentence": "Can chimps climb?", "answer": ["Yes, they can."] }], "notes": "Пункты 1-4 задания 9 (про грандпу/дэдди/себя/друзей) — личные, не включены в индекс (нет объективного ответа)." },
+        { "number": "1", "prompt": "Впиши has got, have got.", "answerType": "verb_form_fill", "items": [{ "sentence": "My sister ___ fair hair.", "answer": ["has got"] }] },
+        { "number": "2", "prompt": "Впиши has got, have got.", "answerType": "verb_form_fill", "items": [{ "sentence": "Jeff ___ a tree house.", "answer": ["has got"] }] },
+        { "number": "3", "prompt": "Впиши has got, have got.", "answerType": "verb_form_fill", "items": [{ "sentence": "My house ___ two bedrooms.", "answer": ["has got"] }] },
+        { "number": "4", "prompt": "Впиши has got, have got.", "answerType": "verb_form_fill", "items": [{ "sentence": "The children ___ nice toys.", "answer": ["have got"] }] },
+        { "number": "5", "prompt": "Впиши has got, have got.", "answerType": "verb_form_fill", "items": [{ "sentence": "It ___ a big nose.", "answer": ["has got"] }] },
+        { "number": "6", "prompt": "Впиши has got, have got.", "answerType": "verb_form_fill", "items": [{ "sentence": "They ___ beautiful T-shirts.", "answer": ["have got"] }] },
+        { "number": "7", "prompt": "Впиши has got, have got.", "answerType": "verb_form_fill", "items": [{ "sentence": "I ___ blue eyes.", "answer": ["have got"] }] }
+      ]
+    },
+    {
+      "printedPage": 10,
+      "section": "Вводные модули. Задание 11 (пронумеровано 1-7) + задание 12, начало (пункты 1-4)",
+      "tasks": [
+        { "number": "1", "prompt": "Напиши предложения о том, кто что имеет/не имеет (✓=has/have got, ✗=hasn't/haven't got).", "answerType": "sentence_from_cue", "items": [{ "cue": "I/a radio (✓)", "answer": "I have got a radio." }] },
+        { "number": "2", "prompt": "Напиши предложения о том, кто что имеет/не имеет.", "answerType": "sentence_from_cue", "items": [{ "cue": "I/a cat (✗)", "answer": "I haven't got a cat." }] },
+        { "number": "3", "prompt": "Напиши предложения о том, кто что имеет/не имеет.", "answerType": "sentence_from_cue", "items": [{ "cue": "Daddy/a brother (✓)", "answer": "Daddy has got a brother." }] },
+        { "number": "4", "prompt": "Напиши предложения о том, кто что имеет/не имеет.", "answerType": "sentence_from_cue", "items": [{ "cue": "My friend/a sister (✗)", "answer": "My friend hasn't got a sister." }] },
+        { "number": "5", "prompt": "Напиши предложения о том, кто что имеет/не имеет.", "answerType": "sentence_from_cue", "items": [{ "cue": "They/a tree house (✗)", "answer": "They haven't got a tree house." }] },
+        { "number": "6", "prompt": "Напиши предложения о том, кто что имеет/не имеет.", "answerType": "sentence_from_cue", "items": [{ "cue": "She/a red hat (✓)", "answer": "She has got a red hat." }] },
+        { "number": "7", "prompt": "Напиши предложения о том, кто что имеет/не имеет.", "answerType": "sentence_from_cue", "items": [{ "cue": "My grandma and grandpa/a garden (✓)", "answer": "My grandma and grandpa have got a garden." }] },
+        { "number": "1", "prompt": "Напиши вопросы и дай на них краткие ответы.", "answerType": "sentence_from_cue", "items": [{ "cue": "the puppet/Has/got/a big nose (✓)", "answer": "Has the puppet got a big nose? Yes, it has." }] },
+        { "number": "2", "prompt": "Напиши вопросы и дай на них краткие ответы.", "answerType": "sentence_from_cue", "items": [{ "cue": "dark hair/got/he/Has (✗)", "answer": "Has he got dark hair? No, he hasn't." }] },
+        { "number": "3", "prompt": "Напиши вопросы и дай на них краткие ответы.", "answerType": "sentence_from_cue", "items": [{ "cue": "flowers/they/in the garden/Have/got (✓)", "answer": "Have they got flowers in the garden? Yes, they have." }] },
+        { "number": "4", "prompt": "Напиши вопросы и дай на них краткие ответы.", "answerType": "sentence_from_cue", "items": [{ "cue": "a green skirt/Has/she/got (✓)", "answer": "Has she got a green skirt? Yes, she has." }] }
+      ]
+    },
+    {
+      "printedPage": 11,
+      "section": "Вводные модули. Задание 12, окончание (пункты 5-7) + задание 13 (открытое) + задание 14, начало (пункты 1-2)",
+      "tasks": [
+        { "number": "5", "prompt": "Напиши вопросы и дай на них краткие ответы.", "answerType": "sentence_from_cue", "items": [{ "cue": "a big mouth/got/he/Has (✗)", "answer": "Has he got a big mouth? No, he hasn't." }] },
+        { "number": "6", "prompt": "Напиши вопросы и дай на них краткие ответы.", "answerType": "sentence_from_cue", "items": [{ "cue": "Have/a beautiful house/got/they (✗)", "answer": "Have they got a beautiful house? No, they haven't." }] },
+        { "number": "7", "prompt": "Напиши вопросы и дай на них краткие ответы.", "answerType": "sentence_from_cue", "items": [{ "cue": "you/Have/a dog/got (✓)", "answer": "Have you got a dog? Yes, I have." }] },
+        {
+          "number": "13",
+          "prompt": "Какую еду любят/не любят есть в твоей семье? Впиши like/don't like, likes/doesn't like и прочитай.",
+          "answerType": "open_creative",
+          "notes": "Личное содержание (что реально любит семья), но грамматическая форма ограничена: 'I' → like/don't like; 'My mummy/daddy/sister/brother' → likes/doesn't like (3-е лицо ед.ч.)."
+        },
+        { "number": "1", "prompt": "Закончи предложения о погоде в разные времена года.", "answerType": "verb_form_fill", "items": [{ "sentence": "It's autumn. It's ___", "answer": ["raining"] }] },
+        { "number": "2", "prompt": "Закончи предложения о погоде в разные времена года.", "answerType": "verb_form_fill", "items": [{ "sentence": "It's winter. The weather is ___", "answer": ["windy and cold"] }] }
+      ]
+    },
+    {
+      "printedPage": 12,
+      "section": "Вводные модули. Задание 14, окончание (пункты 3-4) + задание 15 (открытое) + задание 16, начало (пункты 1-9)",
+      "tasks": [
+        { "number": "3", "prompt": "Закончи предложения о погоде в разные времена года.", "answerType": "verb_form_fill", "items": [{ "sentence": "It's spring. The weather is ___", "answer": ["warm"] }] },
+        { "number": "4", "prompt": "Закончи предложения о погоде в разные времена года.", "answerType": "verb_form_fill", "items": [{ "sentence": "It's summer. It's ___", "answer": ["hot and sunny"] }], "notes": "Ровно 4 варианта банка на 4 сезона (стр.11-12) — каждый использован один раз." },
+        {
+          "number": "15",
+          "prompt": "Напиши, что ты носишь при разной погоде (банк: a jacket, shorts, a coat, a hat, a skirt, socks, shoes, a T-shirt, jeans).",
+          "answerType": "open_creative_verified",
+          "exampleSolution": {
+            "It's sunny": "a T-shirt, shorts, shoes",
+            "It's cold": "a coat, a hat, socks",
+            "It's raining": "a jacket, a hat",
+            "It's windy": "a jacket, jeans"
+          },
+          "notes": "Личный выбор одежды при заданном банке слов — не единственно верный набор. Дан правдоподобный вариант, не строго детерминированный."
+        },
+        { "number": "1", "prompt": "Впиши am, is, isn't, are, aren't, can, can't, do, don't, does, doesn't, has, hasn't.", "answerType": "verb_form_fill", "items": [{ "sentence": "This ___ my friend.", "answer": ["is"] }] },
+        { "number": "2", "prompt": "Впиши am, is, isn't, are, aren't, can, can't, do, don't, does, doesn't, has, hasn't.", "answerType": "verb_form_fill", "items": [{ "sentence": "An elephant ___ jump.", "answer": ["can't"] }], "notes": "Известный факт из лексики Spotlight (слоны не умеют прыгать)." },
+        { "number": "3", "prompt": "Впиши am, is, isn't, are, aren't, can, can't, do, don't, does, doesn't, has, hasn't.", "answerType": "verb_form_fill", "items": [{ "sentence": "How old ___ Larry?", "answer": ["is"] }] },
+        { "number": "4", "prompt": "Впиши am, is, isn't, are, aren't, can, can't, do, don't, does, doesn't, has, hasn't.", "answerType": "verb_form_fill", "items": [{ "sentence": "They ___ sad.", "answer": ["are"] }], "notes": "Грамматически возможны и 'are', и 'aren't' без более широкого контекста/картинки — дан более простой положительный вариант, не 100% уверенное." },
+        { "number": "5", "prompt": "Впиши am, is, isn't, are, aren't, can, can't, do, don't, does, doesn't, has, hasn't.", "answerType": "verb_form_fill", "items": [{ "sentence": "I like orange juice, but I ___ like milk.", "answer": ["don't"] }] },
+        { "number": "6", "prompt": "Впиши am, is, isn't, are, aren't, can, can't, do, don't, does, doesn't, has, hasn't.", "answerType": "verb_form_fill", "items": [{ "sentence": "___ she got a sister? No, she ___.", "answer": ["Has", "hasn't"] }] },
+        { "number": "7", "prompt": "Впиши am, is, isn't, are, aren't, can, can't, do, don't, does, doesn't, has, hasn't.", "answerType": "verb_form_fill", "items": [{ "sentence": "I ___ nine, and my sister ___ five.", "answer": ["am", "is"] }] },
+        { "number": "8", "prompt": "Впиши am, is, isn't, are, aren't, can, can't, do, don't, does, doesn't, has, hasn't.", "answerType": "verb_form_fill", "items": [{ "sentence": "Can he swim? Yes, he ___.", "answer": ["can"] }] },
+        { "number": "9", "prompt": "Впиши am, is, isn't, are, aren't, can, can't, do, don't, does, doesn't, has, hasn't.", "answerType": "verb_form_fill", "items": [{ "sentence": "Where's Lulu? She ___ at the circus.", "answer": ["is"] }] }
+      ]
+    },
+    {
+      "printedPage": 13,
+      "section": "Вводные модули. Задание 16, окончание (пункты 10-16) + задание 17, начало (пункты 1-9)",
+      "tasks": [
+        { "number": "10", "prompt": "Впиши am, is, isn't, are, aren't, can, can't, do, don't, does, doesn't, has, hasn't.", "answerType": "verb_form_fill", "items": [{ "sentence": "___ she sing? Yes, she can.", "answer": ["Can"] }] },
+        { "number": "11", "prompt": "Впиши am, is, isn't, are, aren't, can, can't, do, don't, does, doesn't, has, hasn't.", "answerType": "verb_form_fill", "items": [{ "sentence": "Is he happy? No, he ___.", "answer": ["isn't"] }] },
+        { "number": "12", "prompt": "Впиши am, is, isn't, are, aren't, can, can't, do, don't, does, doesn't, has, hasn't.", "answerType": "verb_form_fill", "items": [{ "sentence": "I ___ swim, but I can run.", "answer": ["can't"] }] },
+        { "number": "13", "prompt": "Впиши am, is, isn't, are, aren't, can, can't, do, don't, does, doesn't, has, hasn't.", "answerType": "verb_form_fill", "items": [{ "sentence": "Do you like English? Yes, I ___.", "answer": ["do"] }] },
+        { "number": "14", "prompt": "Впиши am, is, isn't, are, aren't, can, can't, do, don't, does, doesn't, has, hasn't.", "answerType": "verb_form_fill", "items": [{ "sentence": "Are they at home? No, they ___.", "answer": ["aren't"] }] },
+        { "number": "15", "prompt": "Впиши am, is, isn't, are, aren't, can, can't, do, don't, does, doesn't, has, hasn't.", "answerType": "verb_form_fill", "items": [{ "sentence": "___ your sister like dancing? No, she ___.", "answer": ["Does", "doesn't"] }] },
+        { "number": "16", "prompt": "Впиши am, is, isn't, are, aren't, can, can't, do, don't, does, doesn't, has, hasn't.", "answerType": "verb_form_fill", "items": [{ "sentence": "There ___ balls in the toy box, but there ___ dolls there.", "answer": ["are", "aren't"] }] },
+        { "number": "1", "prompt": "Подбери соответствующую реплику.", "answerType": "question_response_matching", "items": [{ "question": "I'm Larry.", "answer": "g" }], "options": { "a": "It's a lamp.", "b": "I'm 9.", "c": "Take off your jacket.", "d": "Ice cream, yummy!", "e": "Put on your coat.", "f": "She's in the bathroom.", "g": "Hello, Larry.", "h": "Fine, thanks.", "i": "Three.", "j": "Hello, Kate!", "k": "I'm Lulu.", "l": "No, I can't.", "m": "It's windy.", "n": "It's brown." } },
+        { "number": "2", "prompt": "Подбери соответствующую реплику.", "answerType": "question_response_matching", "items": [{ "question": "What's your name?", "answer": "k" }], "options": { "a": "It's a lamp.", "b": "I'm 9.", "c": "Take off your jacket.", "d": "Ice cream, yummy!", "e": "Put on your coat.", "f": "She's in the bathroom.", "g": "Hello, Larry.", "h": "Fine, thanks.", "i": "Three.", "j": "Hello, Kate!", "k": "I'm Lulu.", "l": "No, I can't.", "m": "It's windy.", "n": "It's brown." } },
+        { "number": "3", "prompt": "Подбери соответствующую реплику.", "answerType": "question_response_matching", "items": [{ "question": "How are you?", "answer": "h" }], "options": { "a": "It's a lamp.", "b": "I'm 9.", "c": "Take off your jacket.", "d": "Ice cream, yummy!", "e": "Put on your coat.", "f": "She's in the bathroom.", "g": "Hello, Larry.", "h": "Fine, thanks.", "i": "Three.", "j": "Hello, Kate!", "k": "I'm Lulu.", "l": "No, I can't.", "m": "It's windy.", "n": "It's brown." } },
+        { "number": "4", "prompt": "Подбери соответствующую реплику.", "answerType": "question_response_matching", "items": [{ "question": "This is my sister Kate.", "answer": "j" }], "options": { "a": "It's a lamp.", "b": "I'm 9.", "c": "Take off your jacket.", "d": "Ice cream, yummy!", "e": "Put on your coat.", "f": "She's in the bathroom.", "g": "Hello, Larry.", "h": "Fine, thanks.", "i": "Three.", "j": "Hello, Kate!", "k": "I'm Lulu.", "l": "No, I can't.", "m": "It's windy.", "n": "It's brown." } },
+        { "number": "5", "prompt": "Подбери соответствующую реплику.", "answerType": "question_response_matching", "items": [{ "question": "What's this?", "answer": "a" }], "options": { "a": "It's a lamp.", "b": "I'm 9.", "c": "Take off your jacket.", "d": "Ice cream, yummy!", "e": "Put on your coat.", "f": "She's in the bathroom.", "g": "Hello, Larry.", "h": "Fine, thanks.", "i": "Three.", "j": "Hello, Kate!", "k": "I'm Lulu.", "l": "No, I can't.", "m": "It's windy.", "n": "It's brown." } },
+        { "number": "6", "prompt": "Подбери соответствующую реплику.", "answerType": "question_response_matching", "items": [{ "question": "What colour is the table?", "answer": "n" }], "options": { "a": "It's a lamp.", "b": "I'm 9.", "c": "Take off your jacket.", "d": "Ice cream, yummy!", "e": "Put on your coat.", "f": "She's in the bathroom.", "g": "Hello, Larry.", "h": "Fine, thanks.", "i": "Three.", "j": "Hello, Kate!", "k": "I'm Lulu.", "l": "No, I can't.", "m": "It's windy.", "n": "It's brown." } },
+        { "number": "7", "prompt": "Подбери соответствующую реплику.", "answerType": "question_response_matching", "items": [{ "question": "It's hot.", "answer": "c" }], "options": { "a": "It's a lamp.", "b": "I'm 9.", "c": "Take off your jacket.", "d": "Ice cream, yummy!", "e": "Put on your coat.", "f": "She's in the bathroom.", "g": "Hello, Larry.", "h": "Fine, thanks.", "i": "Three.", "j": "Hello, Kate!", "k": "I'm Lulu.", "l": "No, I can't.", "m": "It's windy.", "n": "It's brown." } },
+        { "number": "8", "prompt": "Подбери соответствующую реплику.", "answerType": "question_response_matching", "items": [{ "question": "How old are you?", "answer": "b" }], "options": { "a": "It's a lamp.", "b": "I'm 9.", "c": "Take off your jacket.", "d": "Ice cream, yummy!", "e": "Put on your coat.", "f": "She's in the bathroom.", "g": "Hello, Larry.", "h": "Fine, thanks.", "i": "Three.", "j": "Hello, Kate!", "k": "I'm Lulu.", "l": "No, I can't.", "m": "It's windy.", "n": "It's brown." } },
+        { "number": "9", "prompt": "Подбери соответствующую реплику.", "answerType": "question_response_matching", "items": [{ "question": "It's cold.", "answer": "e" }], "options": { "a": "It's a lamp.", "b": "I'm 9.", "c": "Take off your jacket.", "d": "Ice cream, yummy!", "e": "Put on your coat.", "f": "She's in the bathroom.", "g": "Hello, Larry.", "h": "Fine, thanks.", "i": "Three.", "j": "Hello, Kate!", "k": "I'm Lulu.", "l": "No, I can't.", "m": "It's windy.", "n": "It's brown." } }
+      ]
+    },
+    {
+      "printedPage": 14,
+      "section": "Вводные модули. Задание 17, окончание (пункты 10-14) + задание 18 (открытое)",
+      "tasks": [
+        { "number": "10", "prompt": "Подбери соответствующую реплику.", "answerType": "question_response_matching", "items": [{ "question": "What's the weather like?", "answer": "m" }], "options": { "a": "It's a lamp.", "b": "I'm 9.", "c": "Take off your jacket.", "d": "Ice cream, yummy!", "e": "Put on your coat.", "f": "She's in the bathroom.", "g": "Hello, Larry.", "h": "Fine, thanks.", "i": "Three.", "j": "Hello, Kate!", "k": "I'm Lulu.", "l": "No, I can't.", "m": "It's windy.", "n": "It's brown." } },
+        { "number": "11", "prompt": "Подбери соответствующую реплику.", "answerType": "question_response_matching", "items": [{ "question": "Where's mummy?", "answer": "f" }], "options": { "a": "It's a lamp.", "b": "I'm 9.", "c": "Take off your jacket.", "d": "Ice cream, yummy!", "e": "Put on your coat.", "f": "She's in the bathroom.", "g": "Hello, Larry.", "h": "Fine, thanks.", "i": "Three.", "j": "Hello, Kate!", "k": "I'm Lulu.", "l": "No, I can't.", "m": "It's windy.", "n": "It's brown." } },
+        { "number": "12", "prompt": "Подбери соответствующую реплику.", "answerType": "question_response_matching", "items": [{ "question": "How many chairs?", "answer": "i" }], "options": { "a": "It's a lamp.", "b": "I'm 9.", "c": "Take off your jacket.", "d": "Ice cream, yummy!", "e": "Put on your coat.", "f": "She's in the bathroom.", "g": "Hello, Larry.", "h": "Fine, thanks.", "i": "Three.", "j": "Hello, Kate!", "k": "I'm Lulu.", "l": "No, I can't.", "m": "It's windy.", "n": "It's brown." } },
+        { "number": "13", "prompt": "Подбери соответствующую реплику.", "answerType": "question_response_matching", "items": [{ "question": "What is your favourite food?", "answer": "d" }], "options": { "a": "It's a lamp.", "b": "I'm 9.", "c": "Take off your jacket.", "d": "Ice cream, yummy!", "e": "Put on your coat.", "f": "She's in the bathroom.", "g": "Hello, Larry.", "h": "Fine, thanks.", "i": "Three.", "j": "Hello, Kate!", "k": "I'm Lulu.", "l": "No, I can't.", "m": "It's windy.", "n": "It's brown." } },
+        { "number": "14", "prompt": "Подбери соответствующую реплику.", "answerType": "question_response_matching", "items": [{ "question": "Can you fly?", "answer": "l" }], "options": { "a": "It's a lamp.", "b": "I'm 9.", "c": "Take off your jacket.", "d": "Ice cream, yummy!", "e": "Put on your coat.", "f": "She's in the bathroom.", "g": "Hello, Larry.", "h": "Fine, thanks.", "i": "Three.", "j": "Hello, Kate!", "k": "I'm Lulu.", "l": "No, I can't.", "m": "It's windy.", "n": "It's brown." }, "notes": "Задание 17 целиком (14 пунктов, стр.13-14) проверено как полная биекция 14↔14 без повторов — 0 расхождений." },
+        {
+          "number": "18",
+          "prompt": "Ответь на вопросы о себе (имя, возраст, еда, внешность, одежда, питомцы, игрушки).",
+          "answerType": "open_creative",
+          "notes": "Полностью личные вопросы — единственного ответа нет в принципе."
+        }
+      ]
+    },
+    {
+      "printedPage": 15,
+      "section": "Вводный тест (Entry test). Задания 1-3 (файл обрывается)",
+      "tasks": [
+        { "number": "1", "prompt": "Вычеркни лишнее слово.", "answerType": "odd_one_out", "items": [{ "words": ["grandma", "mummy", "sister", "boy"], "answer": "boy" }], "notes": "Единственное мужское слово среди женских родственников." },
+        { "number": "2", "prompt": "Вычеркни лишнее слово.", "answerType": "odd_one_out", "items": [{ "words": ["blue", "yellow", "nice", "white"], "answer": "nice" }], "notes": "Единственное не-цвет (качественное прилагательное)." },
+        { "number": "3", "prompt": "Вычеркни лишнее слово.", "answerType": "odd_one_out", "items": [{ "words": ["kitchen", "garden", "bedroom", "living room"], "answer": "garden" }], "notes": "Единственная комната ВНЕ дома." },
+        { "number": "4", "prompt": "Вычеркни лишнее слово.", "answerType": "odd_one_out", "items": [{ "words": ["chair", "table", "book", "bed"], "answer": "book" }], "notes": "Единственное не-мебель." },
+        { "number": "5", "prompt": "Вычеркни лишнее слово.", "answerType": "odd_one_out", "items": [{ "words": ["apples", "chips", "oranges", "bananas"], "answer": "chips" }], "notes": "Единственный не-фрукт." },
+        { "number": "6", "prompt": "Вычеркни лишнее слово.", "answerType": "odd_one_out", "items": [{ "words": ["fish", "run", "jump", "swim"], "answer": "fish" }], "notes": "Единственное существительное среди глаголов действия." },
+        { "number": "7", "prompt": "Вычеркни лишнее слово.", "answerType": "odd_one_out", "items": [{ "words": ["teddy bear", "toy soldier", "puppet", "radio"], "answer": "radio" }], "notes": "Единственная не-игрушка." },
+        { "number": "8", "prompt": "Вычеркни лишнее слово.", "answerType": "odd_one_out", "items": [{ "words": ["skirt", "mouth", "jeans", "shorts"], "answer": "mouth" }], "notes": "Единственная часть тела среди одежды." },
+        { "number": "9", "prompt": "Вычеркни лишнее слово.", "answerType": "odd_one_out", "items": [{ "words": ["winter", "flowers", "summer", "autumn"], "answer": "flowers" }], "notes": "Единственное не-время года." },
+        { "number": "10", "prompt": "Вычеркни лишнее слово.", "answerType": "odd_one_out", "items": [{ "words": ["hot", "sunny", "windy", "spring"], "answer": "spring" }], "notes": "Единственное время года среди описаний погоды." },
+        { "number": "1", "prompt": "Поставь существительное во множественное число там, где нужно.", "answerType": "pluralize_nouns", "items": [{ "count": 3, "noun": "sandwich", "answer": "three sandwiches" }] },
+        { "number": "2", "prompt": "Поставь существительное во множественное число там, где нужно.", "answerType": "pluralize_nouns", "items": [{ "count": 8, "noun": "toy", "answer": "eight toys" }] },
+        { "number": "3", "prompt": "Поставь существительное во множественное число там, где нужно.", "answerType": "pluralize_nouns", "items": [{ "count": 2, "noun": "bedroom", "answer": "two bedrooms" }] },
+        { "number": "4", "prompt": "Поставь существительное во множественное число там, где нужно.", "answerType": "pluralize_nouns", "items": [{ "count": 4, "noun": "toy soldier", "answer": "four toy soldiers" }] },
+        { "number": "5", "prompt": "Поставь существительное во множественное число там, где нужно.", "answerType": "pluralize_nouns", "items": [{ "count": 1, "noun": "garden", "answer": "one garden" }], "notes": "one/garden остаётся в единственном числе." },
+        { "number": "6", "prompt": "Поставь существительное во множественное число там, где нужно.", "answerType": "pluralize_nouns", "items": [{ "count": 9, "noun": "horse", "answer": "nine horses" }] },
+        { "number": "1", "prompt": "Выбери правильное слово (клоуз-тест про Сашу из Твери).", "answerType": "multiple_choice", "items": [{ "question": "I/My name is Sasha.", "options": { "a": "I", "b": "My" }, "answer": "b" }] },
+        { "number": "2", "prompt": "Выбери правильное слово.", "answerType": "multiple_choice", "items": [{ "question": "I am in/from Russia.", "options": { "a": "in", "b": "from" }, "answer": "b" }] },
+        { "number": "3", "prompt": "Выбери правильное слово.", "answerType": "multiple_choice", "items": [{ "question": "I live in/on Tver.", "options": { "a": "in", "b": "on" }, "answer": "a" }] },
+        { "number": "4", "prompt": "Выбери правильное слово.", "answerType": "multiple_choice", "items": [{ "question": "I am/is seven.", "options": { "a": "am", "b": "is" }, "answer": "a" }] },
+        { "number": "5", "prompt": "Выбери правильное слово.", "answerType": "multiple_choice", "items": [{ "question": "this have/is my family.", "options": { "a": "have", "b": "is" }, "answer": "b" }] },
+        { "number": "6", "prompt": "Выбери правильное слово.", "answerType": "multiple_choice", "items": [{ "question": "I has/have got a...", "options": { "a": "has", "b": "have" }, "answer": "b" }] },
+        { "number": "7", "prompt": "Выбери правильное слово.", "answerType": "multiple_choice", "items": [{ "question": "...brother/sister, Ann.", "options": { "a": "brother", "b": "sister" }, "answer": "b" }], "notes": "Ann — женское имя, поэтому 'sister'. Тест продолжается за пределами присланного файла (12 страниц PDF заканчиваются здесь)." }
+      ]
+    }
+  ]
+}

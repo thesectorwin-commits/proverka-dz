@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  background: #FFFEFB;
+  /* 09.09.2026: реальная находка владельца — сравнили с download.max.ru,
+     у которого белых полос над хедером/под футером в той же Safari нет.
+     У них на <html> явно стоит color-scheme (getComputedStyle вернул
+     "light dark"), а у нас это свойство не задавалось вообще. Это
+     ОТДЕЛЬНОЕ от theme-color свойство — оно сообщает браузеру, что
+     страница вообще имеет осознанную цветовую схему, и влияет на то,
+     насколько Safari доверяет странице при раскраске своего интерфейса
+     (нативные элементы форм/скроллбары и, предположительно, площадка
+     для theme-color). Раньше это не пробовали — предыдущие попытки
+     трогали только сам theme-color. У сайта нет тёмной темы вообще
+     (ни одного медиа-запроса prefers-color-scheme в проекте), поэтому
+     честное значение — "light", а не "light dark" (иначе браузер мог бы
+     красить нативные элементы форм в тёмное, пока все остальные
+     кастомные элементы остаются светлыми — несоответствие). */
+  color-scheme: light;
+}
+
+/*
+ * Раньше тетрадная клетка была background у самого body — из-за этого
+ * личный кабинет (бежевый фон вместо клетки, см. components/DashboardShell.tsx)
+ * не мог перекрасить фон под собой: элемент с отрицательным z-index красится
+ * ДО фона body, а не поверх него (body — обычный непозиционированный
+ * потомок html, красится в общем потоке вместе с main/шапкой/таббаром), так
+ * что при скролле/резиновом оттягивании экрана на реальном устройстве клетка
+ * всё равно проглядывала. Теперь клетка — отдельный класс, который кладут
+ * только там, где он нужен (лендинг/вход, см. app/(site)/(notebook)/layout.tsx),
+ * а body по умолчанию простой (совпадает с html), личный кабинет красит свой
+ * фон сам через обычный (не fixed/z-index) блок-контейнер.
+ */
+body {
+  @apply text-ink;
+}
+
+.grid-paper-bg {
+  background:
+    repeating-linear-gradient(to bottom, transparent, transparent 27px, #CFE0EC 27px, #CFE0EC 28px),
+    repeating-linear-gradient(to right, transparent, transparent 27px, #CFE0EC 27px, #CFE0EC 28px),
+    #FFFEFB;
+}
+
+/*
+ * Красная вертикальная линия полей — применяется к обёртке контента
+ * (не к body), чтобы не требовалось управлять классами body из клиентского
+ * JS (антипаттерн document.body.classList в React).
+ */
+.notebook-wrap {
+  position: relative;
+}
+
+.notebook-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 54px;
+  width: 2px;
+  background: #E2596B;
+  opacity: 0.55;
+  z-index: 0;
+}
+
+@media (max-width: 560px) {
+  .notebook-wrap::before {
+    left: 26px;
+  }
+}
